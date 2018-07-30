@@ -44,9 +44,27 @@
 //  Remember to use the Read-Search-Ask method if you get stuck.
 
 import React, { Component } from "react";
+import { connect } from "react-redux";
+//import { click } from "./actions";
+import * as actions from "./actions";
 
-export default class Calculator extends Component {
+class Calculator extends Component {
+	componentWillMount() {
+		this.props.click();
+	}
 	render() {
+		console.log(this.props);
 		return <div>Hello I`m Calculator</div>;
 	}
 }
+
+const mapStateToProps = (state) => {
+	return { data: state.myinput };
+};
+
+const mapDispatchToProps = (dispatch) => {};
+
+export default connect(
+	mapStateToProps,
+	actions
+)(Calculator);
