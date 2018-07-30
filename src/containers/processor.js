@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as actions from "../actions";
-//import MoviesList from "../components/moviesList";
 
 const mapStateToProps = (state) => {
 	return {
@@ -16,9 +15,9 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(actions, dispatch);
 };
 
-class App extends Component {
+class Processor extends Component {
 	//WARNING! To be deprecated in React v17. Use componentDidMount instead.
-	componentWillMount() {
+	componentDidMount() {
 		this.props.movieslist();
 		this.props.directorslist();
 	}
@@ -27,7 +26,7 @@ class App extends Component {
 		console.log(this.props.myinput);
 		return (
 			<div onClick={(e) => this.props.buttonpushed(e)}>
-				{/* <MoviesList {...this.props} /> */}Hello World
+				Hello, I`m Processor (I will be invisible)
 			</div>
 		);
 	}
@@ -36,4 +35,4 @@ class App extends Component {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(App);
+)(Processor);

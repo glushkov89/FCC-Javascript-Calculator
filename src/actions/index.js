@@ -19,6 +19,6 @@ export function directorslist() {
 export function buttonpushed(val) {
 	return {
 		type: "BUTTON",
-		payload: val.target
+		payload: val
 	};
 }
