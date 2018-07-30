@@ -4,13 +4,13 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
 import reducers from "./reducers";
-import Calculator from "./containers/app";
+import App from "./containers/app";
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
 	<Provider store={createStoreWithMiddleware(reducers)}>
-		<Calculator />
+		<App />
 	</Provider>,
 	document.getElementById("root")
 );

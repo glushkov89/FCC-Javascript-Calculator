@@ -3,11 +3,12 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import * as actions from "../actions";
-import MoviesList from "../components/moviesList";
+//import MoviesList from "../components/moviesList";
 
 const mapStateToProps = (state) => {
 	return {
-		data: state.movies
+		data: state.movies,
+		myinput: state.button
 	};
 };
 
@@ -23,10 +24,10 @@ class App extends Component {
 	}
 
 	render() {
-		console.log(this.props);
+		console.log(this.props.myinput);
 		return (
-			<div>
-				<MoviesList {...this.props} />
+			<div onClick={(e) => this.props.buttonpushed(e)}>
+				{/* <MoviesList {...this.props} /> */}Hello World
 			</div>
 		);
 	}

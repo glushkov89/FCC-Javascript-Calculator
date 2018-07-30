@@ -15,3 +15,10 @@ export function directorslist() {
 		payload: [{ id: 1, name: "Tarantino" }, { id: 2, name: "Del Toro" }]
 	};
 }
+
+export function buttonpushed(val) {
+	return {
+		type: "BUTTON",
+		payload: val.target
+	};
+}
