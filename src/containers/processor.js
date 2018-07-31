@@ -7,7 +7,7 @@ import * as actions from "../actions";
 const mapStateToProps = (state) => {
 	return {
 		data: state.movies,
-		myinput: state.button
+		myinput: state.myinput
 	};
 };
 
@@ -16,19 +16,13 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Processor extends Component {
-	//WARNING! To be deprecated in React v17. Use componentDidMount instead.
-	componentDidMount() {
-		this.props.movieslist();
-		this.props.directorslist();
+	componentDidUpdate() {
+		console.log(this.props.myinput);
 	}
 
 	render() {
-		console.log(this.props.myinput);
-		return (
-			<div onClick={(e) => this.props.buttonpushed(e)}>
-				Hello, I`m Processor (I will be invisible)
-			</div>
-		);
+		//console.log(this.props.myinput);
+		return <div>Hello, I`m Processor (I will be invisible)</div>;
 	}
 }
 

@@ -1,0 +1,20 @@
+export default [
+	{ id: "zero", code: "0" },
+	{ id: "one", code: "1" },
+	{ id: "two", code: "2" },
+	{ id: "three", code: "3" },
+	{ id: "four", code: "4" },
+	{ id: "five", code: "5" },
+	{ id: "six", code: "6" },
+	{ id: "seven", code: "7" },
+	{ id: "eight", code: "8" },
+	{ id: "nine", code: "9" },
+	{ id: "decimal", code: "." },
+	{ id: "add", code: "+" },
+	{ id: "subtract", code: "-" },
+	{ id: "multiply", code: "*" },
+	{ id: "divide", code: "/" },
+	{ id: "equals", code: "=" },
+	{ id: "clear", code: "c" },
+	{ id: "clearall", code: "ce" }
+];
