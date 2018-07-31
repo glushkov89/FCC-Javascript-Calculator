@@ -16,5 +16,5 @@ export default [
 	{ id: "divide", code: "/" },
 	{ id: "equals", code: "=" },
 	{ id: "clear", code: "c" },
-	{ id: "clearall", code: "ce" }
+	{ id: "clear-all", code: "ce" }
 ];

@@ -4,26 +4,21 @@ import { bindActionCreators } from "redux";
 
 import * as actions from "../actions";
 
-// const mapStateToProps = (state) => {
-// 	return {
-// 		myinput: state.button
-// 	};
-// };
-
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(actions, dispatch);
 };
 
 class Button extends Component {
+	componentWillUpdate() {
+		console.log("Button updated");
+	}
+
 	render() {
-		console.log(this.props);
+		//		console.log(this.props);
 		return (
 			<div
 				id={this.props.id}
-				onClick={
-					// () => console.log(`Hi I\`m ${this.props.code}`)
-					() => this.props.buttonpushed(this.props.code)
-				}
+				onClick={() => this.props.buttonpushed(this.props.code)}
 			>
 				{this.props.code}
 			</div>

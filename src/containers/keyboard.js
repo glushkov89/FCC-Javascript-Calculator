@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import KeyboardEventHandler from "react-keyboard-event-handler";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -19,20 +20,23 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Keyboard extends PureComponent {
-	// componentDidMount() {
-	// 	this.props.buttonpushed("AAAAAAAAAAAAAAA");
-	// }
-	createButton = () => {};
-	createClickHandler = () => {
-		return () => {};
-	};
+	componentWillUpdate() {
+		console.log("Keyboard updated");
+	}
+	buttonsToRender = buttonList.map((obj) => <Button key={obj.id} {...obj} />);
+	keyboardButtonsToHandle = buttonList.map((obj) => obj.code);
 
-	buttons = buttonList.map((obj) => <Button key={obj.id} {...obj} />);
 	render() {
-		//	console.log(this.props);
+		console.log(this.props);
 		return (
 			<div id="keyboard">
-				Hello, I`m Keyboard, and here are my buttons:{this.buttons}
+				<KeyboardEventHandler
+					handleKeys={["all"]}
+					//{this.keyboardButtonsToHandle}
+					handleEventType={"keyup"}
+					onKeyEvent={(key, e) => this.props.buttonpushed(e.key)}
+				/>
+				Hello, I`m Keyboard, and here are my buttons:{this.buttonsToRender}
 			</div>
 		);
 	}

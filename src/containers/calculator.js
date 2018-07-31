@@ -45,6 +45,7 @@ import React, { Component } from "react";
 //Components
 import Processor from "./processor";
 import Keyboard from "./keyboard";
+import Display from "../components/display";
 
 class Calculator extends Component {
 	render() {
@@ -52,6 +53,7 @@ class Calculator extends Component {
 			<div>
 				Hello, I`m Calculator
 				<Processor />
+				<Display />
 				<Keyboard />
 			</div>
 		);
