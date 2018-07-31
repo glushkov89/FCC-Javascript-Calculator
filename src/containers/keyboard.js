@@ -27,7 +27,7 @@ class Keyboard extends PureComponent {
 	keyboardButtonsToHandle = buttonList.map((obj) => obj.code);
 
 	render() {
-		console.log(this.props);
+		//		console.log(this.props);
 		return (
 			<div id="keyboard">
 				<KeyboardEventHandler

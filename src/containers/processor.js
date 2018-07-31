@@ -6,7 +6,11 @@ import * as actions from "../actions";
 
 const mapStateToProps = (state) => {
 	return {
-		myinput: state.myinput
+		//state: state,
+		myinput: state.myinput.input,
+
+		currinput: state.display.currDisplay,
+		fullinput: state.display.fullDisplay
 	};
 };
 
@@ -16,11 +20,14 @@ const mapDispatchToProps = (dispatch) => {
 
 class Processor extends Component {
 	componentDidUpdate() {
-		//		console.log(this.props.myinput);
+		if (this.props.currinput.length <= 11) {
+			this.props.updatecurrentdisplay(this.props.myinput);
+			this.props.clearbutton();
+		}
 	}
 
 	render() {
-		//		console.log(this.props);
+		console.log(this.props);
 		return <div>Hello, I`m Processor (I will be invisible)</div>;
 	}
 }
