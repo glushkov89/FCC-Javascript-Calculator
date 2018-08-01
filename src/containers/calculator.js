@@ -41,18 +41,25 @@
 // Remember to use the Read-Search-Ask method if you get stuck.
 
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 //Components
 import Processor from "./processor";
 import Keyboard from "./keyboard";
 import Display from "../components/display";
 
+const mapStateToProps = (state) => {
+	return {
+		myinput: state.myinput.input
+	};
+};
+
 class Calculator extends Component {
 	render() {
 		return (
 			<div>
 				Hello, I`m Calculator
-				<Processor />
+				{this.props.myinput ? <Processor /> : null}
 				<Display />
 				<Keyboard />
 			</div>
@@ -60,4 +67,7 @@ class Calculator extends Component {
 	}
 }
 
-export default Calculator;
+export default connect(
+	mapStateToProps,
+	null
+)(Calculator);

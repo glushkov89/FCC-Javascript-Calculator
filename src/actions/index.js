@@ -4,7 +4,7 @@ export function buttonpushed(val) {
 		payload: val
 	};
 }
-export function clearbutton() {
+export function clearinputbuffer() {
 	return {
 		type: "BUTTON",
 		payload: ""

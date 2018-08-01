@@ -19,11 +19,13 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Processor extends Component {
-	componentDidUpdate() {
-		if (this.props.currinput.length <= 11) {
+	fullDisplayLength = 20;
+	currDisplayLength = 11;
+	componentDidMount() {
+		if (this.props.currinput.length < this.currDisplayLength) {
 			this.props.updatecurrentdisplay(this.props.myinput);
-			this.props.clearbutton();
 		}
+		this.props.clearinputbuffer();
 	}
 
 	render() {
