@@ -9,7 +9,13 @@ import Calculator from "./containers/calculator";
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 const initialState = {
 	myinput: { input: "" },
-	display: { currDisplay: "0", fullDisplay: "" }
+	display: {
+		currDisplay: "0",
+		fullDisplay: "",
+		cuDispFull: false,
+		fuDispFull: false
+	},
+	currstate: { entry: true, decimal: false, negative: false }
 };
 
 ReactDOM.render(
