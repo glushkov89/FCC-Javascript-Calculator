@@ -9,12 +9,6 @@ import * as actions from "../actions";
 import buttonList from "../components/buttonList";
 import Button from "../components/button";
 
-// const mapStateToProps = (state) => {
-// 	return {
-// 		myinput: state.button
-// 	};
-// };
-
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators(actions, dispatch);
 };
@@ -26,6 +20,15 @@ class Keyboard extends PureComponent {
 	buttonsToRender = buttonList.map((obj) => <Button key={obj.id} {...obj} />);
 	keyboardButtonsToHandle = buttonList.map((obj) => obj.code);
 
+	copyToClipboard = (id) => {
+		var textField = document.createElement("textarea");
+		textField.innerText = document.getElementById(id).innerHTML;
+		document.body.appendChild(textField);
+		textField.select();
+		document.execCommand("copy");
+		textField.remove();
+	};
+
 	render() {
 		//		console.log(this.props);
 		return (
@@ -36,7 +39,11 @@ class Keyboard extends PureComponent {
 					handleEventType={"keyup"}
 					onKeyEvent={(key, e) => this.props.buttonpushed(e.key)}
 				/>
-				Hello, I`m Keyboard, and here are my buttons:{this.buttonsToRender}
+				<KeyboardEventHandler
+					handleKeys={["ctrl+c"]}
+					onKeyEvent={(key, e) => this.copyToClipboard("display")}
+				/>
+				{this.buttonsToRender}
 			</div>
 		);
 	}
