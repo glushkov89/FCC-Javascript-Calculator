@@ -180,7 +180,7 @@ class Processor extends Component {
 				this.handleArifmetics(val);
 				break;
 			case "Backspace":
-			case "<=":
+			case "<":
 				if (!this.props.isresult) this.handleBackspace();
 				break;
 			case "=":

@@ -11,7 +11,7 @@ class Display extends Component {
 	render() {
 		//		console.log(this.props);
 		return (
-			<div id="display-container">
+			<div className="display-container">
 				Hello, I`m Display.<div id="main-display">
 					Display full input is:{this.props.display.mainDisplayValue}
 				</div>

@@ -29,7 +29,7 @@ class Keyboard extends PureComponent {
 	render() {
 		//		console.log(this.props);
 		return (
-			<div id="keyboard">
+			<div className="keyboard">
 				<KeyboardEventHandler
 					handleKeys={["all"]}
 					//{this.keyboardButtonsToHandle}

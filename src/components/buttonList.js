@@ -15,7 +15,7 @@ export default [
 	{ id: "multiply", code: "*" },
 	{ id: "divide", code: "/" },
 	{ id: "equals", code: "=" },
-	{ id: "backspace", code: "<=" },
+	{ id: "backspace", code: "<" },
 	{ id: "clear", code: "c" },
 	{ id: "clear-all", code: "ce" }
 ];
