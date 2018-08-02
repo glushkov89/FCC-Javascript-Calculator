@@ -9,7 +9,6 @@ const mapStateToProps = (state) => {
 		myinput: state.myinput.input,
 		currdispval: state.display.currentDisplayValue,
 		maindispval: state.display.mainDisplayValue,
-		// isentry: state.currstate.entry,
 		isdecimal: state.currentState.decimal,
 		isresult: state.currentState.isresult,
 		currdispovf: state.display.currentDisplayIsFullFlag,
@@ -111,53 +110,28 @@ class Processor extends Component {
 		}
 	};
 
+	displayResult(result) {
+		this.props.setCurrentDisplayValue(result);
+		this.props.setMainDisplayValue("");
+		this.props.setIsResultFlag(true);
+	}
+
 	handleEnter = () => {
 		if (this.props.maindispval) {
+			// eslint-disable-next-line
 			let result = eval(`${this.props.maindispval}${this.props.currdispval}`);
-			if (result.toString(10).indexOf(".") > 0) {
+			let str = result.toString();
+			console.log(str);
+			if (str.indexOf(".") > 0) {
 				this.props.setIsDecimalFlag(true);
 			}
-			this.props.setMainDisplayValue("");
-			this.props.setCurrentDisplayValue(result);
-			if (result) {
-				this.props.setIsResultFlag(true);
+			if (str.length > this.currDisplayLength + 1) {
+				this.displayResult(result.toExponential(this.currDisplayLength - 5));
+			} else {
+				this.displayResult(result);
 			}
-			//&&this.props.currdispval!=='0.'
-			// if (this.props.isentry) {
-			// 	this.calculate(`${this.props.maindispval.slice(0, -1)}`);
-			// } else {
-			// 	this.calculate(`${this.props.maindispval}${this.props.currdispval}`);
-			// }
 		}
 	};
-
-	// pushToFull = (str) => {
-	// 	if (
-	// 		this.mainDisplayLength - this.props.maindispval.length >
-	// 		this.props.currdispval.length
-	// 	) {
-	// 		this.props.updatefulldisplay(
-	// 			`${this.props.maindispval}${this.props.currdispval}${str}`
-	// 		);
-	// 		this.handleClearEntry();
-	// 	}
-	// };
-
-	// // handleMinus = () => {
-	// // 	if (!this.props.isnegative) {
-	// // 		this.props.makenegative();
-	// // 		this.props.setnegativefl(true);
-	// // 		if (this.props.isentry) this.props.setentryfl(false);
-	// // 	} else {
-	// // 		this.pushToFull("-");
-	// // 	}
-	// // };
-
-	// calculate = (val) => {
-	// 	this.props.setentryfl(true);
-	// 	this.props.setcurrentdisplay(eval(val));
-	// 	this.props.updatefulldisplay("");
-	// };
 
 	handleInput = (val) => {
 		switch (val) {
@@ -212,7 +186,7 @@ class Processor extends Component {
 	}
 
 	render() {
-		console.log(this.props);
+		//console.log(this.props);
 		//		console.log(eval("12/0"));
 		//console.log(this.props.currdispovf);
 		return <div>Hello, I`m Processor (I will be invisible)</div>;
