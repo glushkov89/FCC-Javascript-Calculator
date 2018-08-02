@@ -35,7 +35,8 @@ class Processor extends Component {
 		this.props.currdispval.length >= this.currDisplayLength
 			? this.props.setCurrentDisplayIsFullFlag(true)
 			: this.props.setCurrentDisplayIsFullFlag(false);
-		this.props.maindispval.length >= this.mainDisplayLength
+		this.mainDisplayLength - this.props.maindispval.length <
+		this.props.currdispval.length
 			? this.props.setMainDisplayIsFullFlag(true)
 			: this.props.setMainDisplayIsFullFlag(false);
 	};
@@ -86,21 +87,27 @@ class Processor extends Component {
 	};
 
 	handleArifmetics = (str) => {
+		let isEntry =
+			this.props.currdispval === "0" || this.props.currdispval === "0.";
+
 		if (this.props.maindispval === "") {
-			if (this.props.currdispval !== "0" || this.props.currdispval !== "0.") {
+			if (!isEntry) {
 				this.props.setMainDisplayValue(`${this.props.currdispval}${str}`);
 				this.handleClearEntry();
+			} else {
+				if (str === "-") {
+					this.props.setMainDisplayValue(`${str}`);
+				}
 			}
 		} else {
-			if (this.props.currdispval === "0" || this.props.currdispval === "0.") {
-				this.props.setMainDisplayValue(
-					`${this.props.maindispval.slice(0, -1)}${str}`
-				);
+			if (isEntry) {
+				if (this.props.maindispval !== "-") {
+					this.props.setMainDisplayValue(
+						`${this.props.maindispval.slice(0, -1)}${str}`
+					);
+				}
 			} else {
-				if (
-					this.mainDisplayLength - this.props.maindispval.length >
-					this.props.currdispval.length
-				) {
+				if (!this.props.fulldispovf) {
 					this.props.setMainDisplayValue(
 						`${this.props.maindispval}${this.props.currdispval}${str}`
 					);
@@ -121,12 +128,18 @@ class Processor extends Component {
 			// eslint-disable-next-line
 			let result = eval(`${this.props.maindispval}${this.props.currdispval}`);
 			let str = result.toString();
-			console.log(str);
+			//	console.log(str);
 			if (str.indexOf(".") > 0) {
 				this.props.setIsDecimalFlag(true);
 			}
 			if (str.length > this.currDisplayLength + 1) {
-				this.displayResult(result.toExponential(this.currDisplayLength - 5));
+				str = result.toPrecision(10);
+				console.log(str);
+				if (str.length > this.currDisplayLength + 1) {
+					this.displayResult(result.toExponential(this.currDisplayLength - 5));
+				} else {
+					this.displayResult(str);
+				}
 			} else {
 				this.displayResult(result);
 			}
@@ -186,7 +199,6 @@ class Processor extends Component {
 	}
 
 	render() {
-		//console.log(this.props);
 		//		console.log(eval("12/0"));
 		//console.log(this.props.currdispovf);
 		return <div>Hello, I`m Processor (I will be invisible)</div>;
