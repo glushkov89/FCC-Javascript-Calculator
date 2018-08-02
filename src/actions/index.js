@@ -34,9 +34,9 @@ export function setIsDecimalFlag(val) {
 	};
 }
 
-export function setIsNegativeFlag(val) {
+export function setIsResultFlag(val) {
 	return {
-		type: "SET_NEGATIVE",
+		type: "SET_IS_RESULT",
 		payload: val
 	};
 }
@@ -82,12 +82,5 @@ export function clearAllDisplays() {
 // 	return {
 // 		type: "SET_ENTRY",
 // 		payload: val
-// 	};
-// }
-
-// export function makenegative() {
-// 	return {
-// 		type: "CURRENT_INPUT_NEGATIVE",
-// 		payload: "-"
 // 	};
 // }

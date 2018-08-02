@@ -15,7 +15,7 @@ const initialState = {
 		currentDisplayIsFullFlag: false,
 		mainDisplayFullFlag: false
 	},
-	currentState: { decimal: false }
+	currentState: { decimal: false, isresult: false }
 };
 
 ReactDOM.render(

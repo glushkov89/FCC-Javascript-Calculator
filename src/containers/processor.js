@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 		maindispval: state.display.mainDisplayValue,
 		// isentry: state.currstate.entry,
 		isdecimal: state.currentState.decimal,
-		//isnegative: state.currentState.negative,
+		isresult: state.currentState.isresult,
 		currdispovf: state.display.currentDisplayIsFullFlag,
 		fulldispovf: state.display.mainDisplayFullFlag
 	};
@@ -29,6 +29,7 @@ class Processor extends Component {
 
 	setEntryState = () => {
 		this.props.setIsDecimalFlag(false);
+		this.props.setIsResultFlag(false);
 	};
 
 	checkDisplayOvf = () => {
@@ -48,6 +49,18 @@ class Processor extends Component {
 	handleClearEntry = () => {
 		this.props.clearEntry();
 		this.setEntryState();
+	};
+
+	handleBackspace = () => {
+		if (this.props.currdispval !== "0") {
+			if (this.props.currdispval.endsWith(".")) {
+				this.props.setIsDecimalFlag(false);
+			}
+			this.props.setCurrentDisplayValue(this.props.currdispval.slice(0, -1));
+		}
+		if (this.props.currdispval.length === 1) {
+			this.props.setCurrentDisplayValue("0");
+		}
 	};
 
 	handleZero = () => {
@@ -106,6 +119,9 @@ class Processor extends Component {
 			}
 			this.props.setMainDisplayValue("");
 			this.props.setCurrentDisplayValue(result);
+			if (result) {
+				this.props.setIsResultFlag(true);
+			}
 			//&&this.props.currdispval!=='0.'
 			// if (this.props.isentry) {
 			// 	this.calculate(`${this.props.maindispval.slice(0, -1)}`);
@@ -152,7 +168,7 @@ class Processor extends Component {
 				this.handleClearEntry();
 				break;
 			case "0":
-				if (!this.props.currdispovf) this.handleZero();
+				if (!this.props.currdispovf && !this.props.isresult) this.handleZero();
 				break;
 			case "1":
 			case "2":
@@ -163,16 +179,22 @@ class Processor extends Component {
 			case "7":
 			case "8":
 			case "9":
-				if (!this.props.currdispovf) this.handleOneNine(val);
+				if (!this.props.currdispovf && !this.props.isresult)
+					this.handleOneNine(val);
 				break;
 			case ".":
-				if (!this.props.currdispovf) this.handleDecimal();
+				if (!this.props.currdispovf && !this.props.isresult)
+					this.handleDecimal();
 				break;
 			case "-":
 			case "+":
 			case "*":
 			case "/":
 				this.handleArifmetics(val);
+				break;
+			case "Backspace":
+			case "<=":
+				if (!this.props.isresult) this.handleBackspace();
 				break;
 			case "=":
 			case "Enter":
