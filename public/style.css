@@ -1,19 +1,26 @@
 @import url("https://fonts.googleapis.com/css?family=Orbitron");
 @font-face {
-	font-family: "dseg7";
-	src: url("/fonts/DSEG7CR.ttf") format("truetype"),
-		url("/fonts/DSEG7CR.woff") format("woff"),
-		url("/fonts/DSEG7CR.woff2") format("woff2");
-	font-weight: normal;
-	font-style: normal;
+    font-family: "dseg7";
+    src: url("/fonts/DSEG7CR.ttf") format("truetype"), url("/fonts/DSEG7CR.woff") format("woff"), url("/fonts/DSEG7CR.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
 }
 
 .keyboard {
-	font-family: "Orbitron", sans-serif;
+    -webkit-user-select: none;
+    /* Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+/Edge */
+    user-select: none;
+    /* Standard */
+    font-family: "Orbitron", sans-serif;
 }
 
 .display-container {
-	font-family: "dseg7", sans-serif;
+    font-family: "dseg7", sans-serif;
+    font-size: larger
 }
 
 /*-----TEMP-----*/
