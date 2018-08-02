@@ -29,15 +29,12 @@ class Keyboard extends PureComponent {
 		textField.select();
 		document.execCommand("copy");
 		textField.remove();
-		Alert.warning("Copied to Clipboard", {
+		Alert.info("Copied Result to Clipboard", {
 			position: "top-left",
-			effect: "genie",
-			onShow: function() {
-				console.log("aye!");
-			},
-			beep: false,
-			timeout: 2000,
-			offset: 100
+			effect: "bouncyflip",
+			html: false,
+			timeout: 2000
+			//offset: 100
 		});
 	};
 
