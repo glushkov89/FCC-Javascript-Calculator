@@ -10,12 +10,12 @@ const createStoreWithMiddleware = applyMiddleware()(createStore);
 const initialState = {
 	myinput: { input: "" },
 	display: {
-		currDisplay: "0",
-		fullDisplay: "",
-		cuDispFull: false,
-		fuDispFull: false
+		currentDisplayValue: "0",
+		mainDisplayValue: "",
+		currentDisplayIsFullFlag: false,
+		mainDisplayFullFlag: false
 	},
-	currstate: { entry: true, decimal: false, negative: false }
+	currentState: { decimal: false }
 };
 
 ReactDOM.render(

@@ -7,13 +7,13 @@ import * as actions from "../actions";
 const mapStateToProps = (state) => {
 	return {
 		myinput: state.myinput.input,
-		currinput: state.display.currDisplay,
-		fullinput: state.display.fullDisplay,
-		isentry: state.currstate.entry,
-		isdecimal: state.currstate.decimal,
-		isnegative: state.currstate.negative,
-		currdispovf: state.display.cuDispFull,
-		fulldispovf: state.display.fuDispFull
+		currdispval: state.display.currentDisplayValue,
+		maindispval: state.display.mainDisplayValue,
+		// isentry: state.currstate.entry,
+		isdecimal: state.currentState.decimal,
+		//isnegative: state.currentState.negative,
+		currdispovf: state.display.currentDisplayIsFullFlag,
+		fulldispovf: state.display.mainDisplayFullFlag
 	};
 };
 
@@ -22,117 +22,128 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Processor extends Component {
-	fullDisplayLength = 15;
+	mainDisplayLength = 25;
 	currDisplayLength = 11;
 
-	clearInput = () => this.props.clearinputbuffer();
+	clearInput = () => this.props.clearInputBuffer();
 
 	setEntryState = () => {
-		this.props.setentryfl(true);
-		this.props.setdecimalfl(false);
-		this.props.setnegativefl(false);
+		this.props.setIsDecimalFlag(false);
 	};
 
 	checkDisplayOvf = () => {
-		this.props.currinput.length >= this.currDisplayLength
-			? this.props.setcurrdisplflag(true)
-			: this.props.setcurrdisplflag(false);
-		this.props.fullinput.length >= this.fullDisplayLength
-			? this.props.setfulldisplflag(true)
-			: this.props.setfulldisplflag(false);
-	};
-
-	pushToFull = (str) => {
-		if (
-			this.fullDisplayLength - this.props.fullinput.length >
-			this.props.currinput.length
-		) {
-			this.props.updatefulldisplay(
-				`${this.props.fullinput}${this.props.currinput}${str}`
-			);
-			this.handleClearEntry();
-		}
+		this.props.currdispval.length >= this.currDisplayLength
+			? this.props.setCurrentDisplayIsFullFlag(true)
+			: this.props.setCurrentDisplayIsFullFlag(false);
+		this.props.maindispval.length >= this.mainDisplayLength
+			? this.props.setMainDisplayIsFullFlag(true)
+			: this.props.setMainDisplayIsFullFlag(false);
 	};
 
 	handleClear = () => {
-		this.props.cleardisplay();
+		this.props.clearAllDisplays();
 		this.setEntryState();
 	};
 
 	handleClearEntry = () => {
-		this.props.clearentry();
+		this.props.clearEntry();
 		this.setEntryState();
 	};
 
 	handleZero = () => {
-		if (this.props.isentry || this.props.currinput === "-0") {
+		if (this.props.currdispval === "0") {
 			return; //Return from 'if' not from function
 		} else {
-			this.props.updatecurrentdisplay("0");
+			this.props.updateCurrentDisplayValue("0");
 		}
 	};
 
 	handleOneNine = (str) => {
-		if (this.props.isentry) {
-			this.props.setcurrentdisplay(str);
-			this.props.setentryfl(false);
+		if (this.props.currdispval === "0") {
+			this.props.setCurrentDisplayValue(str);
 		} else {
-			if (this.props.currinput === "-0") {
-				this.props.setcurrentdisplay(`-${str}`);
-			} else {
-				this.props.updatecurrentdisplay(str);
-			}
+			this.props.updateCurrentDisplayValue(str);
 		}
 	};
 
 	handleDecimal = () => {
 		if (!this.props.isdecimal) {
-			this.props.updatecurrentdisplay(".");
-			this.props.setdecimalfl(true);
-			if (this.props.isentry) this.props.setentryfl(false);
+			this.props.updateCurrentDisplayValue(".");
+			this.props.setIsDecimalFlag(true);
 		}
 	};
-
-	// handleMinus = () => {
-	// 	if (!this.props.isnegative) {
-	// 		this.props.makenegative();
-	// 		this.props.setnegativefl(true);
-	// 		if (this.props.isentry) this.props.setentryfl(false);
-	// 	} else {
-	// 		this.pushToFull("-");
-	// 	}
-	// };
 
 	handleArifmetics = (str) => {
-		if (!this.props.isentry) {
-			this.pushToFull(str);
+		if (this.props.maindispval === "") {
+			if (this.props.currdispval !== "0" || this.props.currdispval !== "0.") {
+				this.props.setMainDisplayValue(`${this.props.currdispval}${str}`);
+				this.handleClearEntry();
+			}
 		} else {
-			if (!this.props.fullinput.endsWith(str)) {
-				this.props.updatefulldisplay(
-					`${this.props.fullinput.slice(0, -1)}${str}`
+			if (this.props.currdispval === "0" || this.props.currdispval === "0.") {
+				this.props.setMainDisplayValue(
+					`${this.props.maindispval.slice(0, -1)}${str}`
 				);
+			} else {
+				if (
+					this.mainDisplayLength - this.props.maindispval.length >
+					this.props.currdispval.length
+				) {
+					this.props.setMainDisplayValue(
+						`${this.props.maindispval}${this.props.currdispval}${str}`
+					);
+					this.handleClearEntry();
+				}
 			}
 		}
-	};
-
-	calculate = (val) => {
-		this.props.setcurrentdisplay(eval(val));
-		this.props.updatefulldisplay("");
 	};
 
 	handleEnter = () => {
-		if (this.props.fullinput) {
-			if (!this.props.isentry) {
-				this.calculate(`${this.props.fullinput.slice(0, -1)}`);
-			} else {
-				this.calculate(
-					`${this.props.fullinput.slice(0, -1)}${this.props.currinput}`
-				);
+		if (this.props.maindispval) {
+			let result = eval(`${this.props.maindispval}${this.props.currdispval}`);
+			if (result.toString(10).indexOf(".") > 0) {
+				this.props.setIsDecimalFlag(true);
 			}
+			this.props.setMainDisplayValue("");
+			this.props.setCurrentDisplayValue(result);
+			//&&this.props.currdispval!=='0.'
+			// if (this.props.isentry) {
+			// 	this.calculate(`${this.props.maindispval.slice(0, -1)}`);
+			// } else {
+			// 	this.calculate(`${this.props.maindispval}${this.props.currdispval}`);
+			// }
 		}
 	};
 
-	handleEntry = (val) => {
+	// pushToFull = (str) => {
+	// 	if (
+	// 		this.mainDisplayLength - this.props.maindispval.length >
+	// 		this.props.currdispval.length
+	// 	) {
+	// 		this.props.updatefulldisplay(
+	// 			`${this.props.maindispval}${this.props.currdispval}${str}`
+	// 		);
+	// 		this.handleClearEntry();
+	// 	}
+	// };
+
+	// // handleMinus = () => {
+	// // 	if (!this.props.isnegative) {
+	// // 		this.props.makenegative();
+	// // 		this.props.setnegativefl(true);
+	// // 		if (this.props.isentry) this.props.setentryfl(false);
+	// // 	} else {
+	// // 		this.pushToFull("-");
+	// // 	}
+	// // };
+
+	// calculate = (val) => {
+	// 	this.props.setentryfl(true);
+	// 	this.props.setcurrentdisplay(eval(val));
+	// 	this.props.updatefulldisplay("");
+	// };
+
+	handleInput = (val) => {
 		switch (val) {
 			case "c":
 				this.handleClear();
@@ -141,7 +152,7 @@ class Processor extends Component {
 				this.handleClearEntry();
 				break;
 			case "0":
-				this.handleZero();
+				if (!this.props.currdispovf) this.handleZero();
 				break;
 			case "1":
 			case "2":
@@ -152,10 +163,10 @@ class Processor extends Component {
 			case "7":
 			case "8":
 			case "9":
-				this.handleOneNine(val);
+				if (!this.props.currdispovf) this.handleOneNine(val);
 				break;
 			case ".":
-				this.handleDecimal();
+				if (!this.props.currdispovf) this.handleDecimal();
 				break;
 			case "-":
 			case "+":
@@ -173,16 +184,15 @@ class Processor extends Component {
 	};
 
 	componentDidMount() {
-		if (!this.props.currdispovf) {
-			this.handleEntry(this.props.myinput);
-		}
+		this.handleInput(this.props.myinput);
 		this.checkDisplayOvf();
 		this.clearInput();
 	}
 
 	render() {
-		//console.log(this.props);
-		console.log(this.props.currdispovf);
+		console.log(this.props);
+		//		console.log(eval("12/0"));
+		//console.log(this.props.currdispovf);
 		return <div>Hello, I`m Processor (I will be invisible)</div>;
 	}
 }

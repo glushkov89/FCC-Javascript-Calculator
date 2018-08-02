@@ -3,25 +3,28 @@ export default function(state = {}, action) {
 		case "UPDATE_CURRENT_DISPLAY":
 			return {
 				...state,
-				currDisplay: state.currDisplay + action.payload
+				currentDisplayValue: state.currentDisplayValue + action.payload
 			};
 		case "SET_CURRENT_DISPLAY":
 			return {
 				...state,
-				currDisplay: action.payload
+				currentDisplayValue: action.payload
 			};
-		case "FULL_INPUT":
-			return { ...state, fullDisplay: action.payload };
+		case "MAIN_INPUT":
+			return { ...state, mainDisplayValue: action.payload };
 		case "CLEAR_ALL":
-			return { ...state, fullDisplay: "", currDisplay: "0" };
+			return { ...state, mainDisplayValue: "", currentDisplayValue: "0" };
 		case "CLEAR_ENTRY":
-			return { ...state, currDisplay: action.payload };
+			return { ...state, currentDisplayValue: "0" };
 		case "CURRENT_INPUT_NEGATIVE":
-			return { ...state, currDisplay: action.payload + state.currDisplay };
+			return {
+				...state,
+				currentDisplayValue: action.payload + state.currentDisplayValue
+			};
 		case "CURRENT_DISPLAY_IS_FULL":
-			return { ...state, cuDispFull: action.payload };
-		case "FULL_DISPLAY_IS_FULL":
-			return { ...state, fuDispFull: action.payload };
+			return { ...state, currentDisplayIsFullFlag: action.payload };
+		case "MAIN_DISPLAY_IS_FULL":
+			return { ...state, mainDisplayFullFlag: action.payload };
 		default:
 			return state;
 	}

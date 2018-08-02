@@ -60,6 +60,7 @@ class Calculator extends Component {
 			<div>
 				Hello, I`m Calculator
 				{this.props.myinput ? <Processor /> : null}
+				{/* <Processor /> */}
 				<Display />
 				<Keyboard />
 			</div>

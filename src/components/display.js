@@ -13,10 +13,10 @@ class Display extends Component {
 		return (
 			<div id="display">
 				Hello, I`m Display.<div id="full-input">
-					Display full input is:{this.props.display.fullDisplay}
+					Display full input is:{this.props.display.mainDisplayValue}
 				</div>
 				<div id="current-input">
-					Display current input is:{this.props.display.currDisplay}
+					Display current input is:{this.props.display.currentDisplayValue}
 				</div>
 			</div>
 		);
