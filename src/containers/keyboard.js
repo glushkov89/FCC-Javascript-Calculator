@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import KeyboardEventHandler from "react-keyboard-event-handler";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import Alert from "react-s-alert";
 
 import * as actions from "../actions";
 
@@ -17,6 +18,7 @@ class Keyboard extends PureComponent {
 	componentWillUpdate() {
 		console.log("Keyboard updated");
 	}
+
 	buttonsToRender = buttonList.map((obj) => <Button key={obj.id} {...obj} />);
 	keyboardButtonsToHandle = buttonList.map((obj) => obj.code);
 
@@ -27,6 +29,16 @@ class Keyboard extends PureComponent {
 		textField.select();
 		document.execCommand("copy");
 		textField.remove();
+		Alert.warning("Copied to Clipboard", {
+			position: "top-left",
+			effect: "genie",
+			onShow: function() {
+				console.log("aye!");
+			},
+			beep: false,
+			timeout: 2000,
+			offset: 100
+		});
 	};
 
 	render() {
