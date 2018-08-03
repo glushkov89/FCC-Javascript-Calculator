@@ -19,7 +19,7 @@ class Button extends Component {
 			//<div className={this.props.class}>
 			<div className={"my-button-container"} id={this.props.contid}>
 				<div
-					className={"my-button"}
+					className={"my-button normal"}
 					id={this.props.id}
 					onClick={() => this.props.buttonpushed(this.props.code)}
 				>

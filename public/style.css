@@ -7,17 +7,18 @@
 
 @media only screen and (orientation: portrait) {
     .calculator-container {
-        min-width: 90%;
+        min-width: 98%;
     }
 }
 
 /*Calculator styling*/
 
 .calculator-container {
-    max-width: 40%;
-    height: 50vh;
+    max-width: 30%;
+    min-height: 50vh;
     margin: 10% auto;
-    background-color: #acae98;
+    background-color: #9ca073;
+    border-radius: 10px;
 }
 
 /*Keyboard styling*/
@@ -32,17 +33,20 @@
     user-select: none;
     /* Standard */
     font-family: "Orbitron", sans-serif;
-    padding: 10px;
+    background-color: #9ca073;
+    padding: 2vh;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: larger;
     display: grid;
     grid-template-columns: auto auto auto auto;
-    /* grid-template-columns: 20% 20% 20% 20%; */
     justify-content: center;
     align-content: center;
     grid-gap: 10px;
 }
 
 .my-button-container {
-    padding: 5px;
+    padding: 2px;
 }
 
 .my-button {
@@ -50,15 +54,67 @@
     padding: 10px;
 }
 
+.normal {
+    width: 23px;
+    height: 23px;
+    border-radius: 3px;
+    box-shadow: 0px 5px 5px 1px #000;
+    border: 1px solid black;
+}
+
+.my-button:hover {
+    width: 23px;
+    height: 23px;
+    border-radius: 3px;
+    box-shadow: inset 0px 0px 2px 1px #000;
+    border: 1px solid black;
+}
+
 #mycontid-18 {
     grid-column: 3 / 5;
+}
+
+#mycontid-18>.my-button {
+    width: auto;
+}
+
+#zero,
+#one,
+#two,
+#three,
+#four,
+#five,
+#six,
+#seven,
+#eight,
+#nine,
+#decimal {
+    border-color: #21262a;
+    background-color: #dae7e3;
+    color: #21262a;
+}
+
+#divide,
+#multiply,
+#add,
+#subtract,
+#equals {
+    background-color: #21262a;
+    color: #c2b781;
+}
+
+#clear-all,
+#backspace,
+#clear {
+    background-color: #921f26;
+    color: #c2b781;
 }
 
 /*Display styling*/
 
 .display-container {
-    height: 10vh;
-    margin: 15px;
+    min-height: 10vh;
+    margin: 15px 10%;
     border-radius: 3px;
     font-family: "dseg7", sans-serif;
     color: #4dde93;
@@ -66,17 +122,19 @@
 }
 
 #main-display {
-    padding: 12px 0 0 0;
+    padding: 15px 0 0 0;
     height: 30%;
     font-size: smaller;
     text-align: center;
+    text-shadow: 0px 0px 10px gray;
 }
 
 #display {
-    padding: 5px 10px;
-    height: 50%;
+    padding: 15px 10px 10px 5px;
+    height: 40%;
     font-size: larger;
     text-align: center;
+    text-shadow: 0px 0px 10px gray;
 }
 
 /*Footer*/
@@ -87,13 +145,8 @@ footer {
 
 /*-----TEMP-----*/
 
-.my-button,
-.my-button-container,
-.keyboard,
-.calculator-container,
-.calculator,
-#root,
-footer,
-.col {
+/* .my-button-container, */
+
+.calculator-container {
     border: 1px solid black;
 }
