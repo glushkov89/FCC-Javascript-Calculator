@@ -62,13 +62,13 @@ const mapStateToProps = (state) => {
 class Calculator extends Component {
 	render() {
 		return (
-			<div>
-				Hello, I`m Calculator
-				{this.props.myinput ? <Processor /> : null}
-				{/* <Processor /> */}
-				<Display />
-				<Keyboard />
-				<Alert />
+			<div className={"calculator-container"}>
+				<div className={"calculator"}>
+					{this.props.myinput ? <Processor /> : null}
+					<Display />
+					<Keyboard />
+					<Alert />
+				</div>
 			</div>
 		);
 	}

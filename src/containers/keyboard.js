@@ -15,11 +15,14 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Keyboard extends PureComponent {
-	componentWillUpdate() {
-		console.log("Keyboard updated");
-	}
-
-	buttonsToRender = buttonList.map((obj) => <Button key={obj.id} {...obj} />);
+	buttonsToRender = buttonList.map(
+		(obj, i) => <Button key={obj.id} {...obj} contid={`mycontid-${i}`} />
+		// i === 18 ? (
+		// 	<Button key={obj.id} {...obj} class={"my-button col-6"} />
+		// ) : (
+		// 	<Button key={obj.id} {...obj} class={"my-button-container"} />
+		// )
+	);
 	keyboardButtonsToHandle = buttonList.map((obj) => obj.code);
 
 	copyToClipboard = (id) => {
@@ -53,6 +56,11 @@ class Keyboard extends PureComponent {
 					onKeyEvent={(key, e) => this.copyToClipboard("display")}
 				/>
 				{this.buttonsToRender}
+				{/* <div className={"row"}>{this.buttonsToRender.slice(0, 4)}</div>
+				<div className={"row"}>{this.buttonsToRender.slice(4, 8)}</div>
+				<div className={"row"}>{this.buttonsToRender.slice(8, 12)}</div>
+				<div className={"row"}>{this.buttonsToRender.slice(12, 16)}</div>
+				<div className={"row"}>{this.buttonsToRender.slice(16)}</div> */}
 			</div>
 		);
 	}

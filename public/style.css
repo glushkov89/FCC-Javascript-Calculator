@@ -2,9 +2,25 @@
 @font-face {
     font-family: "dseg7";
     src: url("/fonts/DSEG7CR.ttf") format("truetype"), url("/fonts/DSEG7CR.woff") format("woff"), url("/fonts/DSEG7CR.woff2") format("woff2");
-    font-weight: 900;
     font-style: normal;
 }
+
+@media only screen and (orientation: portrait) {
+    .calculator-container {
+        min-width: 90%;
+    }
+}
+
+/*Calculator styling*/
+
+.calculator-container {
+    max-width: 40%;
+    height: 50vh;
+    margin: 10% auto;
+    background-color: #acae98;
+}
+
+/*Keyboard styling*/
 
 .keyboard {
     -webkit-user-select: none;
@@ -16,11 +32,68 @@
     user-select: none;
     /* Standard */
     font-family: "Orbitron", sans-serif;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    /* grid-template-columns: 20% 20% 20% 20%; */
+    justify-content: center;
+    align-content: center;
+    grid-gap: 10px;
 }
 
+.my-button-container {
+    padding: 5px;
+}
+
+.my-button {
+    text-align: center;
+    padding: 10px;
+}
+
+#mycontid-18 {
+    grid-column: 3 / 5;
+}
+
+/*Display styling*/
+
 .display-container {
+    height: 10vh;
+    margin: 15px;
+    border-radius: 3px;
     font-family: "dseg7", sans-serif;
-    font-size: larger
+    color: #4dde93;
+    background-color: #011509;
+}
+
+#main-display {
+    padding: 12px 0 0 0;
+    height: 30%;
+    font-size: smaller;
+    text-align: center;
+}
+
+#display {
+    padding: 5px 10px;
+    height: 50%;
+    font-size: larger;
+    text-align: center;
+}
+
+/*Footer*/
+
+footer {
+    text-align: center;
 }
 
 /*-----TEMP-----*/
+
+.my-button,
+.my-button-container,
+.keyboard,
+.calculator-container,
+.calculator,
+#root,
+footer,
+.col {
+    border: 1px solid black;
+}

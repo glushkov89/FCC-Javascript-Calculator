@@ -12,7 +12,7 @@ class Display extends Component {
 		//		console.log(this.props);
 		return (
 			<div className="display-container">
-				<div id="main-display">{this.props.display.mainDisplayValue || 0}</div>
+				<div id="main-display">{this.props.display.mainDisplayValue}</div>
 				<div id="display">{this.props.display.currentDisplayValue}</div>
 			</div>
 		);

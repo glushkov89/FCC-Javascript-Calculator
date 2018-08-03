@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 class Processor extends Component {
-	mainDisplayLength = 25;
+	mainDisplayLength = 20;
 	currDisplayLength = 11;
 
 	clearInput = () => this.props.clearInputBuffer();

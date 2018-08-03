@@ -16,11 +16,15 @@ class Button extends Component {
 	render() {
 		//		console.log(this.props);
 		return (
-			<div
-				id={this.props.id}
-				onClick={() => this.props.buttonpushed(this.props.code)}
-			>
-				{this.props.code}
+			//<div className={this.props.class}>
+			<div className={"my-button-container"} id={this.props.contid}>
+				<div
+					className={"my-button"}
+					id={this.props.id}
+					onClick={() => this.props.buttonpushed(this.props.code)}
+				>
+					{this.props.code}
+				</div>
 			</div>
 		);
 	}
