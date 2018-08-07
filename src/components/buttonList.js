@@ -1,6 +1,6 @@
 export default [
 	{ id: "divide", code: "/" },
-	{ id: "multiply", code: "*" },
+	{ id: "multiply", code: "x" },
 	{ id: "add", code: "+" },
 	{ id: "subtract", code: "-" },
 	{ id: "seven", code: "7" },

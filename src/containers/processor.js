@@ -175,9 +175,11 @@ class Processor extends Component {
 				break;
 			case "-":
 			case "+":
-			case "*":
 			case "/":
 				this.handleArifmetics(val);
+				break;
+			case "x":
+				this.handleArifmetics("*");
 				break;
 			case "Backspace":
 			case "<":
